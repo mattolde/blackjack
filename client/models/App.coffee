@@ -2,10 +2,14 @@
 class window.App extends Backbone.Model
 
   initialize: ->
+    @createNewGame()
+
+  createNewGame: ->
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @get('playerHand').on('stand', @stand, @)
     @get('playerHand').on('bust', @bust, @)
+
     @set 'dealerHand', deck.dealDealer()
     @get('dealerHand').on('win', @win, @)
     @set 'gameOver', false

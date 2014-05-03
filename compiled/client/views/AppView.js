@@ -18,11 +18,15 @@
       },
       "click .stand-button": function() {
         return this.model.get('playerHand').stand();
+      },
+      "click .new-game-button": function() {
+        return this.model.createNewGame();
       }
     };
 
     AppView.prototype.initialize = function() {
       this.model.on('change:gameOver', this.render, this);
+      this.model.on('change:deck', this.render, this);
       return this.render();
     };
 

@@ -1,6 +1,14 @@
 # TODO
-- App.coffee: refactor to have a game beneath the outer blackjack model
+- User require.js
 - switch to mustache for templating
+- place templates into html
+
+- allow player to select between the ACE + 10 or 1
+- Update design
+- create unit test
+
+# COMPLETED
+- Create new game
 
 ## NOTES
 

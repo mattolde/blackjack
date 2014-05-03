@@ -27,9 +27,11 @@ class window.AppView extends Backbone.View
   events:
     "click .hit-button": -> @model.get('playerHand').hit()
     "click .stand-button": -> @model.get('playerHand').stand()
+    "click .new-game-button": -> @model.createNewGame()
 
   initialize: ->
     @model.on('change:gameOver', @render, @)
+    @model.on('change:deck', @render, @)
     @render()
 
   render: ->

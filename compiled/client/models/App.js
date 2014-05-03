@@ -11,6 +11,10 @@
     }
 
     App.prototype.initialize = function() {
+      return this.createNewGame();
+    };
+
+    App.prototype.createNewGame = function() {
       var deck;
       this.set('deck', deck = new Deck());
       this.set('playerHand', deck.dealPlayer());
