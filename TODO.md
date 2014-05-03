@@ -1,7 +1,5 @@
 # TODO
 - User require.js
-- switch to mustache for templating
-- place templates into html
 
 - allow player to select between the ACE + 10 or 1
 - Update design
@@ -9,6 +7,8 @@
 
 # COMPLETED
 - Create new game
+- switch to mustache for templating
+- place templates into html
 
 ## NOTES
 

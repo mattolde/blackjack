@@ -4,8 +4,33 @@
     <link href="styles/app.css" rel="stylesheet" type="text/css" media="screen">
   </head>
   <body>
+    <script id="card-template" type="text/template">
+      {{rankName }} of {{ suitName }}
+    </script>
+
+    <script id="game-template" type="text/template">
+      {{#gameOver}}
+      <button class="new-game-button">New Game</button>
+      {{/gameOver}}
+
+      {{^gameOver}}
+      <button class="hit-button">Hit</button> 
+      <button class="stand-button">Stand</button>    
+      {{/gameOver}}
+
+      <div class="player-hand-container"></div>
+      <div class="dealer-hand-container"></div> 
+    </script>
+
+    <script id='hand-template' type='type/template'>
+      <h2>{{#isDealer}}Dealer{{/isDealer}}
+          {{^isDealer}}You{{/isDealer}} 
+          (<span class="score"></span>)</h2>
+    </script>
+
     <script src="lib/jquery.js"></script>
     <script src="lib/underscore.js"></script>
+    <script src="bower_components/mustache/mustache.js"></script>
     <script src="lib/backbone.js"></script>
 
     <script src="compiled/client/models/Card.js"></script>

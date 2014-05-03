@@ -10,7 +10,7 @@
       return AppView.__super__.constructor.apply(this, arguments);
     }
 
-    AppView.prototype.template = _.template('<% if(gameOver){ %> <button class="new-game-button">New Game</button> <% if(winner === "player"){ %> <h1>WINNING!!!</h1> <% }else if(winner === "dealer"){ %> <h1>Dealer Wins</h1> <% }else{ %> <h1>Draw</h1> <% } %> <% }else{ %> <button class="hit-button">Hit</button> <button class="stand-button">Stand</button> <% } %> <div class="player-hand-container"></div> <div class="dealer-hand-container"></div>');
+    AppView.prototype.template = $('#game-template').html();
 
     AppView.prototype.events = {
       "click .hit-button": function() {
@@ -32,10 +32,7 @@
 
     AppView.prototype.render = function() {
       this.$el.children().detach();
-      this.$el.html(this.template({
-        gameOver: this.model.get('gameOver'),
-        winner: this.model.get('winner')
-      }));
+      this.$el.html(Mustache.to_html(this.template, this.model.attributes));
       this.$('.player-hand-container').html(new HandView({
         collection: this.model.get('playerHand')
       }).el);

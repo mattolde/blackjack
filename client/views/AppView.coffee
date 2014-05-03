@@ -1,28 +1,6 @@
 class window.AppView extends Backbone.View
 
-  template: _.template '
-    <% if(gameOver){ %>
-    
-    <button class="new-game-button">New Game</button>
-
-      <% if(winner === "player"){ %>
-        <h1>WINNING!!!</h1>
-      <% }else if(winner === "dealer"){ %>
-        <h1>Dealer Wins</h1>
-      <% }else{ %>
-        <h1>Draw</h1>
-      <% } %>  
-
-    <% }else{ %>
-
-    <button class="hit-button">Hit</button> 
-    <button class="stand-button">Stand</button>    
-    
-    <% } %>      
-
-    <div class="player-hand-container"></div>
-    <div class="dealer-hand-container"></div>    
-  '
+  template: $('#game-template').html()
 
   events:
     "click .hit-button": -> @model.get('playerHand').hit()
@@ -36,9 +14,8 @@ class window.AppView extends Backbone.View
 
   render: ->
     @$el.children().detach()
-    @$el.html @template({
-      gameOver: @model.get('gameOver'),
-      winner: @model.get('winner')
-      })
+
+    @$el.html Mustache.to_html @template, @model.attributes
+
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
