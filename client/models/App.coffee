@@ -5,6 +5,10 @@ class window.App extends Backbone.Model
     @createNewGame()
 
   createNewGame: ->
+    @set 'playerWinMsg', 'Player Wins!'
+    @set 'dealerWinMsg', 'Dealer Wins!'
+    @set 'drawMsg', 'Draw'
+
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @get('playerHand').on('stand', @stand, @)
@@ -12,6 +16,7 @@ class window.App extends Backbone.Model
 
     @set 'dealerHand', deck.dealDealer()
     @get('dealerHand').on('win', @win, @)
+
     @set 'gameOver', false
 
   stand: ->
@@ -25,20 +30,20 @@ class window.App extends Backbone.Model
     dealerScore = @get('dealerHand').scores()[0]
 
     if dealerScore > playerScore and dealerScore <= 21
-      @set 'winner', 'dealer'
+      @set 'winner', @get 'dealerWinMsg'
       @set 'gameOver', true
 
     if dealerScore > 21
-      @set 'winner', 'player'
+      @set 'winner', @get 'playerWinMsg'
       @set 'gameOver', true
 
     if dealerScore >= 17
       if dealerScore > playerScore
-        @set 'winner', 'dealer'
+        @set 'winner', @get 'dealerWinMsg'
       else if dealerScore is playerScore
-        @set 'winner', 'draw'
+        @set 'winner', @get 'drawWinMsg'
       else
-        @set 'winner', 'player'
+        @set 'winner', @get 'playerWinMsg'
 
       @set 'gameOver', true
 
@@ -46,5 +51,5 @@ class window.App extends Backbone.Model
     playerScore = @get('playerHand').scores()[0]
 
     if playerScore > 21
-      @set 'winner', 'dealer'
+      @set 'winner', @get 'dealerWinMsg'
       @set 'gameOver', true

@@ -5,26 +5,37 @@
   </head>
   <body>
     <script id="card-template" type="text/template">
-      {{rankName }} of {{ suitName }}
+      
     </script>
 
     <script id="game-template" type="text/template">
-      {{#gameOver}}
-      <button class="new-game-button">New Game</button>
-      {{/gameOver}}
+      <div class='controls'>
+        {{#gameOver}}
+        <button class="new-game-button">New Game</button>
+      </div>
+        {{#winner}}
+        <div class='game-result'>
+          <h1>{{ winner }}</h1>
+        </div>
+        {{/winner}}
 
-      {{^gameOver}}
-      <button class="hit-button">Hit</button> 
-      <button class="stand-button">Stand</button>    
-      {{/gameOver}}
+        {{/gameOver}}
 
-      <div class="player-hand-container"></div>
-      <div class="dealer-hand-container"></div> 
+        {{^gameOver}}
+          <button class="hit-button">Hit</button> 
+          <button class="stand-button">Stand</button>    
+        </div>
+        {{/gameOver}}
+
+      <div class='game'>
+        <div class="player-hand-container"></div>
+        <div class="dealer-hand-container"></div> 
+      </div>
+
     </script>
 
     <script id='hand-template' type='type/template'>
-      <h2>{{#isDealer}}Dealer{{/isDealer}}
-          {{^isDealer}}You{{/isDealer}} 
+      <h2>{{#isDealer}}Dealer{{/isDealer}}{{^isDealer}}You{{/isDealer}} 
           (<span class="score"></span>)</h2>
     </script>
 

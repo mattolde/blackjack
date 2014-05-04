@@ -16,6 +16,9 @@
 
     App.prototype.createNewGame = function() {
       var deck;
+      this.set('playerWinMsg', 'Player Wins!');
+      this.set('dealerWinMsg', 'Dealer Wins!');
+      this.set('drawMsg', 'Draw');
       this.set('deck', deck = new Deck());
       this.set('playerHand', deck.dealPlayer());
       this.get('playerHand').on('stand', this.stand, this);
@@ -40,20 +43,20 @@
       playerScore = this.get('playerHand').scores()[0];
       dealerScore = this.get('dealerHand').scores()[0];
       if (dealerScore > playerScore && dealerScore <= 21) {
-        this.set('winner', 'dealer');
+        this.set('winner', this.get('dealerWinMsg'));
         this.set('gameOver', true);
       }
       if (dealerScore > 21) {
-        this.set('winner', 'player');
+        this.set('winner', this.get('playerWinMsg'));
         this.set('gameOver', true);
       }
       if (dealerScore >= 17) {
         if (dealerScore > playerScore) {
-          this.set('winner', 'dealer');
+          this.set('winner', this.get('dealerWinMsg'));
         } else if (dealerScore === playerScore) {
-          this.set('winner', 'draw');
+          this.set('winner', this.get('drawWinMsg'));
         } else {
-          this.set('winner', 'player');
+          this.set('winner', this.get('playerWinMsg'));
         }
         return this.set('gameOver', true);
       }
@@ -63,7 +66,7 @@
       var playerScore;
       playerScore = this.get('playerHand').scores()[0];
       if (playerScore > 21) {
-        this.set('winner', 'dealer');
+        this.set('winner', this.get('dealerWinMsg'));
         return this.set('gameOver', true);
       }
     };

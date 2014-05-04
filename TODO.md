@@ -1,8 +1,7 @@
 # TODO
-- User require.js
-
-- allow player to select between the ACE + 10 or 1
 - Update design
+- User require.js
+- allow player to select between the ACE + 10 or 1
 - create unit test
 
 # COMPLETED

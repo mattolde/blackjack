@@ -11,7 +11,7 @@
     }
 
     Card.prototype.initialize = function(params) {
-      return this.set({
+      this.set({
         revealed: true,
         value: !params.rank || 10 < params.rank ? 10 : params.rank,
         suitName: ['Spades', 'Diamonds', 'Clubs', 'Hearts'][params.suit],
@@ -30,11 +30,16 @@
           }
         })()
       });
+      return this.set('img', this.formatImg());
     };
 
     Card.prototype.flip = function() {
       this.set('revealed', !this.get('revealed'));
       return this;
+    };
+
+    Card.prototype.formatImg = function() {
+      return "cards/" + (this.get('rankName')) + "-" + (this.get('suitName')) + ".png";
     };
 
     return Card;

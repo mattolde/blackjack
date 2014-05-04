@@ -10,6 +10,8 @@
       return CardView.__super__.constructor.apply(this, arguments);
     }
 
+    CardView.prototype.tagName = 'div';
+
     CardView.prototype.className = 'card';
 
     CardView.prototype.template = $('#card-template').html();
@@ -27,7 +29,10 @@
       this.$el.children().detach().end().html;
       this.$el.html(Mustache.to_html(this.template, this.model.attributes));
       if (!this.model.get('revealed')) {
-        return this.$el.addClass('covered');
+        this.$el.addClass('covered');
+      }
+      if (!!this.model.get('revealed')) {
+        return this.$el.css('background-image', "url(img/" + (this.model.get('img')) + ")");
       }
     };
 
